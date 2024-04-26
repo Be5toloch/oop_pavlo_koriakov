@@ -108,7 +108,7 @@ public:
 
     bool empty()
     {
-        return length <= 0;
+        return length <= 1;
     }
 
     Vec(const Vec &other) = delete;
