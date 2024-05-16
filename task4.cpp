@@ -28,7 +28,6 @@ public:
 
 
 class Request : public Ipv4Address{
-    Ipv4Address origin;
 
 public:
     Request():
@@ -38,10 +37,28 @@ public:
     }
 
     void log(){
-        cout<<"Request of unknown type from "<<static_cast<int>(arr[0])<<"."<<static_cast<int>(arr[1])<<"."<<static_cast<int>(arr[2])<<"."<<static_cast<int>(arr[3]);
+        cout<<"Request of unknown type from "<<static_cast<int>(arr[0])<<"."<<static_cast<int>(arr[1])<<"."<<static_cast<int>(arr[2])<<"."<<static_cast<int>(arr[3])<<endl;
     }
 };
 
+
+class HttpRequest : public Request{
+    string url;
+public:
+
+    HttpRequest(){
+
+    }
+
+
+    void SetterStringForUrl(string _url){
+        this->url = _url;
+    }
+
+    void printLog(){
+        cout<<"Http Request of from "<<static_cast<int>(arr[0])<<"."<<static_cast<int>(arr[1])<<"."<<static_cast<int>(arr[2])<<"."<<static_cast<int>(arr[3]) <<" to url: "<<url<<endl;
+    }
+};
 
 int main(){
 
@@ -64,13 +81,16 @@ for (int i = 0; i < COUNT_OF_VALUES; i++)
     request.setterValueToArray(values[i], i);
 }
 
-for (int i = 0; i < 4; ++i)
-{
-    
+request.log();
+
+HttpRequest http;
+
+for (int i = 0; i < COUNT_OF_VALUES; i++) {
+    http.setterValueToArray(request.getterValueFromArray(i), i);
 }
 
-
-request.log();
+http.SetterStringForUrl("Hello");
+http.printLog();
 
 return 0;
 }
